@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,23 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('/', function () {
+    $server = config('app.name');
+
+    $users = User::limit(1000)
+        ->inRandomOrder()
+        ->get()
+        ->shuffle()
+        ->transform(function ($item) use ($server) {
+            $item->server_name = $server;
+
+            return $item;
+        })
+        ->shuffle()
+        ->shuffle()
+        ->take(100);
+
+    return response()->json($users);
 });
