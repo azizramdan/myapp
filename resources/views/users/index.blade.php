@@ -61,7 +61,7 @@
             <th scope="col">Name char length</th>
             <th scope="col">Created at</th>
             <th scope="col">Updated at</th>
-            <th scope="col">Accessed at</th>
+            <!-- <th scope="col">Accessed at</th> -->
           </tr>
         </thead>
         <tbody>
@@ -75,7 +75,7 @@
             <td>{{ $user->name_char_length }}</td>
             <td>{{ $user->created_at }}</td>
             <td>{{ $user->updated_at }}</td>
-            <td>{{ $user->accessed_at }}</td>
+            <!-- <td>{{ $user->accessed_at }}</td> -->
           </tr>
           @endforeach
         </tbody>

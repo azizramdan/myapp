@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         $data->name_char_length = strlen($data->name);
         $data->username = Str::snake($data->name);
-        $data->accessed_at = now();
+        // $data->accessed_at = now();
 
         return $data;
     }
