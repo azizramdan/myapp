@@ -67,6 +67,9 @@ class UserController extends Controller
                 })
         );
 
-        return view('users.index', compact('users'));
+        return view('users.index', [
+            'users' => $users,
+            'server' => config('app.name'),
+        ]);
     }
 }
