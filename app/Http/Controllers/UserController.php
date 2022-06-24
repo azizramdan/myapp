@@ -27,23 +27,18 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $users = User::query()
-            ->inRandomOrder()
-            ->paginate($request->perpage ?? 1000);
+        $users = User::query()->paginate($request->perpage ?? 500);
 
         /**
          * @var \Illuminate\Pagination\AbstractPaginator $users
          */
         $users->setCollection(
             $users->getCollection()
-                ->shuffle()
                 ->transform(function ($item) {
                     $item = $this->appendAdditional($item);
         
                     return $item;
                 })
-                ->shuffle()
-                ->shuffle()
         );
 
         return $this->success($users);
