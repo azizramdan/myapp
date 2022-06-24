@@ -50,4 +50,23 @@ class UserController extends Controller
         
         return $this->success($user);
     }
+
+    public function indexHtml(Request $request)
+    {
+        $users = User::query()->paginate($request->perpage ?? 500);
+
+        /**
+         * @var \Illuminate\Pagination\AbstractPaginator $users
+         */
+        $users->setCollection(
+            $users->getCollection()
+                ->transform(function ($item) {
+                    $item = $this->appendAdditional($item);
+        
+                    return $item;
+                })
+        );
+
+        return view('users.index', compact('users'));
+    }
 }
